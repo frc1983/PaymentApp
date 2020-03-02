@@ -21,8 +21,11 @@ router.post('/save', function (req, res, next) {
 });
 
 router.get('/list', function (req, res, next) {
-  Payment.find({ category_id: req.query.category })
-    .populate({ path: 'category_id', select: ['name', 'id'] })
+  var query = Payment.find();
+  if (req.query.category)
+    query.where('category_id').equals(req.query.category);
+
+  query.populate({ path: 'category_id', select: ['name', 'id'] })
     .exec(function (err, payments) {
       if (err) {
         console.log(err);

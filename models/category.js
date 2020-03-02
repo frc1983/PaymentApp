@@ -6,7 +6,6 @@ var CategorySchema = new mongoose.Schema({
 
 CategorySchema.methods.toJSON = function() {
   var obj = this.toObject();
-  delete obj._id;
   delete obj.__v;
   delete obj.updatedAt;
   delete obj.createdAt;
